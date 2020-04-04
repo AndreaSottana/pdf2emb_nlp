@@ -41,5 +41,6 @@ setup(
         "yaml"
     ],
     tests_require=["pytest", "flaky"],
+    include_package_data=True,
     python_requires=">=3.6"
 )
