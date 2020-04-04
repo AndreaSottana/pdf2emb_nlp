@@ -1,11 +1,40 @@
+import os
 from setuptools import find_packages, setup
 
+
+def read(*paths):
+    """Builds a file path from *paths and returns the content."""
+    with open(os.path.join(*paths), 'r') as f:
+        return f.read()
+
+
 setup(
-    name='src',
-    packages=find_packages(),
+    name='pdf2emb_nlp',
+    packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     version='0.1.0',
     description='NLP tool for scraping text from a corpus of PDF files, embedding the sentences in the text and '
-                'finding semantically similar sentences to a given search query.',
-    author='AndreaSottana',
+                'finding semantically similar sentences to a given search query',
+    long_description=read("README.md"),
+    url='https://github.com/AndreaSottana/pdf2emb_nlp',
+    download_url='https://pypi.python.org/pypi/pdf2emb_nlp',
     license='MIT',
+    author='AndreaSottana',
+    install_requires=[
+        "allennlp==0.9.0",
+        "gensim==3.8.1",
+        "nltk==3.4.5",
+        "numpy==1.18.2",
+        "pandas==0.25.3",
+        "pytest==5.4.1",
+        "scikit-learn==0.22.1",
+        "scipy==1.4.1",
+        "sentence-transformers==0.2.5.1",
+        "slate3k==0.5.3",
+        "typing==3.7.4.1",
+        "tqdm==4.45.0",
+        "yaml"
+    ],
+    tests_require=["pytest", "flaky"],
+    python_requires=">=3.6"
+
 )
