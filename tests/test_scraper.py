@@ -1,7 +1,7 @@
 import os
 import numpy as np
 import pandas as pd
-from src.scraper import DocumentScraper
+from pdf2emb_nlp.scraper import DocumentScraper
 
 
 class TestDocumentScraper:

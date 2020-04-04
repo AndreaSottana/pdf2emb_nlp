@@ -1,7 +1,7 @@
 import os
 import pytest
 import numpy as np
-from src.process_user_queries import query_embeddings
+from pdf2emb_nlp.process_user_queries import query_embeddings
 
 
 def test_query_embeddings_with_word2vec_with_exact_query():

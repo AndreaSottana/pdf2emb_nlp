@@ -1,9 +1,9 @@
 import os
 import numpy as np
-from src.scraper import DocumentScraper
-from src.arrange_text import CorpusGenerator
-from src.embedder import Embedder
-from src.process_user_queries import query_embeddings
+from pdf2emb_nlp.scraper import DocumentScraper
+from pdf2emb_nlp.arrange_text import CorpusGenerator
+from pdf2emb_nlp.embedder import Embedder
+from pdf2emb_nlp.process_user_queries import query_embeddings
 
 
 def test_end_to_end_runner():

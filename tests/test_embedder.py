@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import warnings
 import pandas.util.testing as pdt
-from src.embedder import Embedder
+from pdf2emb_nlp.embedder import Embedder
 import pytest
 
 

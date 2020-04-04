@@ -1,8 +1,8 @@
 import os
 import yaml
 import logging.config
-from src.scraper import DocumentScraper
-from src.arrange_text import CorpusGenerator
+from pdf2emb_nlp.scraper import DocumentScraper
+from pdf2emb_nlp.arrange_text import CorpusGenerator
 
 
 if __name__ == "__main__":

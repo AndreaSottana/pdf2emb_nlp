@@ -2,7 +2,7 @@ import os
 import numpy as np
 import pandas as pd
 import pandas.util.testing as pdt
-from src.arrange_text import CorpusGenerator
+from pdf2emb_nlp.arrange_text import CorpusGenerator
 
 
 class TestCorpusGenerator:

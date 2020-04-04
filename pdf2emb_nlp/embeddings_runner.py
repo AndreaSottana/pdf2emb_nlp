@@ -3,7 +3,7 @@ import json
 import yaml
 import logging.config
 import pandas as pd
-from src.embedder import Embedder
+from pdf2emb_nlp.embedder import Embedder
 
 
 models_to_be_run = [
