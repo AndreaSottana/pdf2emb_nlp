@@ -19,6 +19,12 @@ setup(
     download_url='https://pypi.python.org/pypi/pdf2emb_nlp',
     license='MIT',
     author='AndreaSottana',
+    classifiers=[
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+    ],
     install_requires=[
         "allennlp==0.9.0",
         "gensim==3.8.1",
@@ -36,5 +42,4 @@ setup(
     ],
     tests_require=["pytest", "flaky"],
     python_requires=">=3.6"
-
 )
