@@ -1,10 +1,8 @@
 import nltk
-import os
 import pandas as pd
 import numpy as np
 import pickle
-import yaml
-import logging.config
+import logging
 from scipy.spatial.distance import cdist
 from gensim.models import Word2Vec
 from allennlp.commands.elmo import ElmoEmbedder
@@ -157,43 +155,3 @@ def query_embeddings(
     )
     return user_input_embedding, trained_df
 
-
-if __name__ == '__main__':
-    user_search_input = 'cell phone'
-    model_name = 'BERT'  # change as appropriate
-    DATA_DIR = os.getenv("DATA_DIR")
-    MODELS_DIR = os.getenv("MODELS_DIR")
-    LOGGING_CONFIG = os.getenv("LOGGING_CONFIG")
-    with open(LOGGING_CONFIG, 'r') as f:
-        config = yaml.safe_load(f)
-    logging.config.dictConfig(config)
-
-    model_pickle = {
-        'Word2Vec': "word2vec.pickle",
-        'Word2Vec_TfIdf_weighted': "word2vec_tfidf.pickle",
-        'ELMo': "elmo_model.pickle",
-        'BERT': "bert_model_nli-stsb.pickle"
-    }
-    tfidf_vectorizer = os.path.join(MODELS_DIR, "tfidf_vectorizer.pickle")
-    trained_df_ending = {
-        'Word2Vec': "_with_Word2Vec.parquet",
-        'Word2Vec_TfIdf_weighted': "_with_Word2Vec_TfIdf_weighted.parquet",
-        'ELMo': "_with_ELMo.parquet",
-        'BERT': "_with_BERT_nli-stsb.parquet"
-    }
-    expected_embeddings_colname = {
-        'Word2Vec': "Word2Vec",
-        'Word2Vec_TfIdf_weighted': "Word2Vec_with_TfIdf_weights",
-        'ELMo': "ELMo_layer_3",
-        'BERT': "BERT"
-    }
-    model = os.path.join(MODELS_DIR, model_pickle[model_name])  # this is optional for ELMo and BERT.
-    trained_df_path = os.path.join(DATA_DIR, 'processed', 'corpus_by_sentence'+trained_df_ending[model_name])
-    user_input_embedding, trained_df = query_embeddings(
-        user_search_input, trained_df_path, expected_embeddings_colname[model_name], model_name, model,
-        distance_metric='cosine', tfidf_vectorizer=tfidf_vectorizer
-    )
-    # tfidf_vectorizer is not used (and optional) when model is not 'Word2Vec_TfIdf_weighted'
-    if user_input_embedding.size and not trained_df.empty:  # they must not be empty
-        print(trained_df.sort_values('metric_distance', ascending=True)[['sentence', 'metric_distance']].
-              reset_index(drop=True).head(10))
