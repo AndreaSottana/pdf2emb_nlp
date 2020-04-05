@@ -30,7 +30,7 @@ Project Organization
     │
     ├── requirements.txt   <- The requirements file for reproducing the analysis environment.
     │
-    ├── setup.py           <- Makes project pip installable (pip install -e .) so src can be imported
+    ├── setup.py           <- Makes project pip installable (pip install -e .) so pdf2emb_nlp can be imported
     │
     ├── MANIFEST.in        <- Tells setup.py which package data to include and exclude.
     │
@@ -39,13 +39,16 @@ Project Organization
     │   ├── filenames.json            
     │   └── words_to_replace.json
     │
-    ├── src                <- Source code for use in this project. See description below for how to use the files.
-    │   ├── __init__.py    <- Makes src a Python module
+    ├── scripts            <- Executable scripts are saved here. They should be run in the order listed below.
+    │   ├── data_processing_runner.py   
+    │   ├── embeddings_runner.py
+    │   └── user_search_runner.py
+    │
+    ├── pdf2emb_nlp        <- Source code for use in this project. See description below for how to use the files.
+    │   ├── __init__.py    <- Makes pdf2emb_nlp a Python module
     │   │
     │   ├── arrange_text.py
-    │   ├── data_processing_runner.py
     │   ├── embedder.py
-    │   ├── embeddings_runner.py
     │   ├── json_creator.py
     │   ├── logging.yaml
     │   ├── process_user_queries.py
@@ -53,7 +56,7 @@ Project Organization
     │   └── tmp            <- The folder where the loggers are saved (for example, debug.log, info.log, warning.log)
     │                         Logs have not been uploaded to GitHub.
     │
-    ├── tests              <- Unit tests for all functions and methods defined in all scripts within the src folder, to                
+    ├── tests              <- Unit tests for all functions and methods defined in all modules within the pdf2emb_nlp folder, to                
     │   │                     be run using pytest. It also includes an end-to-end test. These should not be modified by
     │   │                     the user.  
     │   ├── conftest.py
@@ -139,7 +142,7 @@ if __name__ == "__main__":
 The file `words_to_replace.json` in the `config` folder is used for ad-hoc text cleaning. When running
 `scraper.document_corpus_to_pandas_df()`, the json is deserialised into a python dictionary, and the corpus text will be
 cleaned by replacing each key in this dictionary with its value. In order to modify and customize the content of this
-json file, run the script `src/json_creator.py` and adapt it as necessary.
+json file, run the script `pdf2emb_nlp/json_creator.py` and adapt it as necessary.
 
 Once you have created a file `corpus_by_sentence.csv`, you can embed the sentences in this file using your model of choice out of 
 Word2Vec (with the option to include Tf-Idf weights), ELMo and BERT. For each model, sentence-level embeddings are 
@@ -215,10 +218,10 @@ contains the same data as the `corpus_by_sentence.csv` file previously saved, wi
 chosen model. A separate `.parquet` has been saved for each model, although the user may modify the script above to save
 all models' embeddings in the same `.parquet` file. The file names of the `.pickle`, `.npy` and `.parquet` files are
 stored in the `filenames.json ` in the `config` folder. In order to modify and customize these names, run the script 
-`src/json_creator.py` and adapt it as necessary.
+`pdf2emb_nlp/json_creator.py` and adapt it as necessary.
 
 Finally, in order to search through your corpus of PDF files given a *user search query* (which can be a single word or a 
-few words), run the `user_search_runner.py` script in the `src` folder, which imports the `process_user_queries` module:
+few words), run the `user_search_runner.py` script in the `scripts` folder, which imports the `process_user_queries` module:
 ```python
 import os
 import yaml

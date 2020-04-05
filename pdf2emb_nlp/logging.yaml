@@ -45,22 +45,22 @@ loggers:
     handlers: [console, debug_file_handler, info_file_handler, warning_file_handler]
     propagate: no
 
-  src.scraper:
+  pdf2emb_nlp.scraper:
     level: DEBUG
     handlers: [console, debug_file_handler, info_file_handler, warning_file_handler]
     propagate: no
 
-  src.arrange_text:
+  pdf2emb_nlp.arrange_text:
     level: DEBUG
     handlers: [console, debug_file_handler, info_file_handler, warning_file_handler]
     propagate: no
 
-  src.embedder:
+  pdf2emb_nlp.embedder:
     level: DEBUG
     handlers: [console, debug_file_handler, info_file_handler, warning_file_handler]
     propagate: no
 
-  src.process_user_queries:
+  pdf2emb_nlp.process_user_queries:
     level: DEBUG
     handlers: [console, debug_file_handler, info_file_handler, warning_file_handler]
     propagate: no
