@@ -39,8 +39,7 @@ setup(
         "sentence-transformers==0.2.5.1",
         "slate3k==0.5.3",
         "typing==3.7.4.1",
-        "tqdm==4.45.0",
-        "yaml"
+        "tqdm==4.45.0"
     ],
     tests_require=["pytest", "flaky"],
     include_package_data=True,
