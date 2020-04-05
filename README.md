@@ -42,19 +42,18 @@ Project Organization
     ├── scripts            <- Executable scripts are saved here. They should be run in the order listed below.
     │   ├── data_processing_runner.py   
     │   ├── embeddings_runner.py
-    │   └── user_search_runner.py
+    │   ├── user_search_runner.py
+    │   └── tmp            <- The folder where the loggers are saved (for example, debug.log, info.log, warning.log)
+    │                         Logs have not been uploaded to GitHub.
     │
     ├── pdf2emb_nlp        <- Source code for use in this project. See description below for how to use the files.
     │   ├── __init__.py    <- Makes pdf2emb_nlp a Python module
-    │   │
     │   ├── arrange_text.py
     │   ├── embedder.py
     │   ├── json_creator.py
     │   ├── logging.yaml
     │   ├── process_user_queries.py
-    │   ├── scraper.py
-    │   └── tmp            <- The folder where the loggers are saved (for example, debug.log, info.log, warning.log)
-    │                         Logs have not been uploaded to GitHub.
+    │   └── scraper.py
     │
     ├── tests              <- Unit tests for all functions and methods defined in all modules within the pdf2emb_nlp folder, to                
     │   │                     be run using pytest. It also includes an end-to-end test. These should not be modified by
@@ -65,7 +64,6 @@ Project Organization
     │   ├── test_embedder.py
     │   ├── test_process_user_queries.py
     │   ├── test_scraper.py
-    │   │
     │   └── fixtures       <- This folder contains all the pytest fixtures required to run the tests. These should not
     │       │                 be modified by the user.                
     │       ├── dummy_embeddings.npy
@@ -86,13 +84,17 @@ Project Organization
     │       └── words_to_replace.json
     │
     ├── test_environment.py
-    │
     └── tox.ini            <- tox file with settings for running tox; see tox.testrun.org
 
 
 --------
 
-After having cloned this repository, please run a test to ensure your environment is properly set-up. This project has 
+Clone this repository from GitHub, or install this project by running 
+ ```
+$ pip install pdf2emb_nlp
+```
+on the terminal command (or `pip3`, as appropriate). 
+If you have cloned it from GitHub, you can run a test to ensure your environment is properly set-up. This project has 
 not been tested on versions of Python older than 3.6, and some versions of the `numpy` older than 1.17 are also known 
 to cause issues. Please run the following line in your terminal
 ```

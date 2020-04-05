@@ -1,5 +1,6 @@
 import os
 from setuptools import find_packages, setup
+from pdf2emb_nlp.__init__ import __version__
 
 
 def read(*paths):
@@ -11,7 +12,7 @@ def read(*paths):
 setup(
     name='pdf2emb_nlp',
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
-    version='0.1.0',
+    version=__version__,
     description='NLP tool for scraping text from a corpus of PDF files, embedding the sentences in the text and '
                 'finding semantically similar sentences to a given search query',
     long_description=read("README.md"),
