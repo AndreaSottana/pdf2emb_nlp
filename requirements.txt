@@ -10,6 +10,7 @@ sentence-transformers==0.2.5.1
 slate3k==0.5.3
 typing==3.7.4.1
 tqdm==4.45.0
+PyYAML==5.1.2
 # local package
 -e .
 # external requirements
