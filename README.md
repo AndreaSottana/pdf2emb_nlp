@@ -90,7 +90,7 @@ Project Organization
 --------
 
 Clone this repository from GitHub, or install this project by running 
- ```
+```
 $ pip install pdf2emb_nlp
 ```
 on the terminal command (or `pip3`, as appropriate). 

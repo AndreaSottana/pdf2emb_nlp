@@ -16,6 +16,7 @@ setup(
     description='NLP tool for scraping text from a corpus of PDF files, embedding the sentences in the text and '
                 'finding semantically similar sentences to a given search query',
     long_description=read("README.md"),
+    long_description_content_type='text/markdown',
     url='https://github.com/AndreaSottana/pdf2emb_nlp',
     download_url='https://pypi.python.org/pypi/pdf2emb_nlp',
     license='MIT',
