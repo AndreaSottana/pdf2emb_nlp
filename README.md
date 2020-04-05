@@ -7,7 +7,7 @@ The code in this repository performs 3 main tasks.
 - Corpus querying. This is in the form of a search tool, where the user can input a search query (one to a few words), and the tool will output the most similar sentences in the PDF corpus to the user query. This is done by comparing the embedding of the user query against all the embeddings of each sentence in the scraped corpus of PDFs. This effectively acts as a search engine. It is important that the model used to embed the user's search query matches the NLP model used to embed the PDF corpus. The default similarity metric is cosine similarity, although this can be changed by the user.
 
 Project Organization
-------------
+------------------------
 
     ├── LICENSE            <- The full Licence text. This project is released under the MIT Licence.
     ├── Makefile           <- Makefile with commands like `make data` or `make train`
