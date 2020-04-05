@@ -1,5 +1,5 @@
 NLP tool for scraping text from a corpus of PDF files, embedding the sentences in the text and finding semantically similar sentences to a given search query
-==============================
+====================================================================================================================================================================================
 
 The code in this repository performs 3 main tasks.  
 - Scraping the text from a corpus of PDF files. The text is then cleaned, split into sentences, and saved into a pd.DataFrame, .csv or .parquet file containing 3 columns. One column contains the text of all the PDFs in the corpus (one sentence per row), the second column contains the title of the PDF where each sentence is taken from, and the third column contains the number of the page where each sentence is located within that PDF. This enables easy lookup.
