@@ -112,8 +112,8 @@ sentences,  and save this into a .csv file. The script imports the two modules `
 import os
 import yaml
 import logging.config
-from src.scraper import DocumentScraper
-from src.arrange_text import CorpusGenerator
+from pdf2emb_nlp.scraper import DocumentScraper
+from pdf2emb_nlp.arrange_text import CorpusGenerator
 
 
 if __name__ == "__main__":
@@ -153,7 +153,7 @@ import json
 import yaml
 import logging.config
 import pandas as pd
-from src.embedder import Embedder
+from pdf2emb_nlp.embedder import Embedder
 
 
 models_to_be_run = [
@@ -218,43 +218,40 @@ stored in the `filenames.json ` in the `config` folder. In order to modify and c
 `src/json_creator.py` and adapt it as necessary.
 
 Finally, in order to search through your corpus of PDF files given a *user search query* (which can be a single word or a 
-few words), run the `process_user_queries.py` script in the `src` folder:
+few words), run the `user_search_runner.py` script in the `src` folder, which imports the `process_user_queries` module:
 ```python
+import os
+import yaml
+import json
+import logging.config
+from pdf2emb_nlp.process_user_queries import query_embeddings
+
+
 if __name__ == '__main__':
-    user_search_input = ''  # INSERT YOUR SEARCH QUERY
-    model_name = 'BERT'  # CHOOSE YOUR MODEL OUT OF ['Word2Vec', 'Word2Vec_TfIdf_weighted', 'ELMo', 'BERT']
+    user_search_input = 'cell phone'
+    model_name = 'BERT'  # change as appropriate
     DATA_DIR = os.getenv("DATA_DIR")
+    CONFIG_DIR = os.getenv('CONFIG_DIR')
     MODELS_DIR = os.getenv("MODELS_DIR")
     LOGGING_CONFIG = os.getenv("LOGGING_CONFIG")
     with open(LOGGING_CONFIG, 'r') as f:
         config = yaml.safe_load(f)
     logging.config.dictConfig(config)
+    with open(os.path.join(CONFIG_DIR, 'filenames.json'), 'r') as f:
+        file_names = json.load(f)
 
-    model_pickle = {
-        'Word2Vec': "word2vec.pickle",
-        'Word2Vec_TfIdf_weighted': "word2vec_tfidf.pickle",
-        'ELMo': "elmo_model.pickle",
-        'BERT': "bert_model_nli-stsb.pickle"
-    }
     tfidf_vectorizer = os.path.join(MODELS_DIR, "tfidf_vectorizer.pickle")
-    trained_df_ending = {
-        'Word2Vec': "_with_Word2Vec.parquet",
-        'Word2Vec_TfIdf_weighted': "_with_Word2Vec_TfIdf_weighted.parquet",
-        'ELMo': "_with_ELMo.parquet",
-        'BERT': "_with_BERT_nli-stsb.parquet"
-    }
-    expected_embeddings_colname = {
-        'Word2Vec': "Word2Vec",
-        'Word2Vec_TfIdf_weighted': "Word2Vec_with_TfIdf_weights",
-        'ELMo': "ELMo_layer_3",
-        'BERT': "BERT"
-    }
-    model = os.path.join(MODELS_DIR, model_pickle[model_name])  # this is optional for ELMo and BERT.
-    trained_df_path = os.path.join(DATA_DIR, 'processed', 'corpus_by_sentence'+trained_df_ending[model_name])
+
+    model = os.path.join(MODELS_DIR, file_names[model_name]["model_filename"])  # this is optional for ELMo and BERT.
+    trained_df_path = os.path.join(DATA_DIR, 'processed', file_names[model_name]["parquet_filename"])
     user_input_embedding, trained_df = query_embeddings(
-        user_search_input, trained_df_path, expected_embeddings_colname[model_name], model_name, model,
+        user_search_input, trained_df_path, file_names[model_name]["column_name"], model_name, model,
         distance_metric='cosine', tfidf_vectorizer=tfidf_vectorizer
     )
+    # tfidf_vectorizer is not used (and optional) when model is not 'Word2Vec_TfIdf_weighted'
+    if user_input_embedding.size and not trained_df.empty:  # they must not be empty
+        print(trained_df.sort_values('metric_distance', ascending=True)[['sentence', 'metric_distance']].
+              reset_index(drop=True).head(10))
 ```
 
 At this point, the `user_input_embedding` is the embedding of the user search query, and `trained_df` is the 
