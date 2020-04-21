@@ -95,7 +95,7 @@ $ pip install pdf2emb_nlp
 ```
 on the terminal command (or `pip3`, as appropriate). 
 If you have cloned it from GitHub, you can run a test to ensure your environment is properly set-up. This project has 
-not been tested on versions of Python older than 3.6, and some versions of the `numpy` older than 1.17 are also known 
+not been tested on versions of Python older than 3.6, and some versions of the `numpy` library older than 1.17 are also known 
 to cause issues. Please run the following line in your terminal
 ```
 $ PYTHONHASHSEED=123 python3 -m pytest
