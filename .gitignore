@@ -7,5 +7,7 @@ models/
 pdf2emb_nlp/__pycache__/
 __pycache__
 scripts/tmp/
-
+build/
+dist/
+pdf2emb_nlp.egg-info/
 
