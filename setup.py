@@ -33,6 +33,7 @@ setup(
         "nltk==3.4.5",
         "numpy==1.18.2",
         "pandas==0.25.3",
+        "pyarrow==0.16.0",
         "pytest==5.4.1",
         "scikit-learn==0.22.1",
         "scipy==1.4.1",
