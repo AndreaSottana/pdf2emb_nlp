@@ -25,9 +25,6 @@ Project Organization
     ├── models             <- Trained and serialized models. This is where your NLP models will be saved. No models have 
     │                         been uploaded to GitHub.
     │
-    ├── notebooks          <- Jupyter notebooks. This is where you can store Jupyter Notebooks. No notebooks have been 
-    │                         uploaded to GitHub.
-    │
     ├── requirements.txt   <- The requirements file for reproducing the analysis environment.
     │
     ├── setup.py           <- Makes project pip installable (pip install -e .) so pdf2emb_nlp can be imported
