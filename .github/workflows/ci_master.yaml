@@ -43,7 +43,7 @@ jobs:
 
 #  update_coveralls:
 #    name: Update coveralls.io
-#    needs: run_tests  # only update coverage on coveralls.io if all tests pass successfully.
+#    needs: build  # only update coverage on coveralls.io if all tests pass successfully.
 #    runs_on: ubuntu-latest
 
 
