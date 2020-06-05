@@ -21,7 +21,7 @@ jobs:
 
   build:
     name: Build
-    runs-on: [ubuntu-latest, macos-latest]  # running tests on both Linux and MacOs environments
+    runs-on: ubuntu-latest #, macos-latest]  # running tests on both Linux and MacOs environments
     strategy:
       matrix:
         python-version: [3.6, 3.7, 3.8]
