@@ -1,0 +1,10 @@
+name: ci_master
+
+on:
+  pull_request:
+    branches:
+      - master
+
+  push:
+    branches:
+      - master
