@@ -35,17 +35,24 @@ jobs:
         run: |
           python3 -m pip install --upgrade pip
           python3 -m pip install -r requirements.txt
+          python3 -m pip install pytest-cov coveralls
           echo -e "import nltk\nnltk.download('punkt')" | python3
         # it needs 'punkt' in order to work properly (dataset is not downloaded by default at main nltk installation)
       - name: Run tests with pytest
         env:
           PYTHONHASHSEED: 123  # required for deterministic reproducibility of two Word2Vec tests
         run: |
-          python3 -m pytest -v
+          python3 -m pytest -v --cov-report term-missing --cov=pdf2emb_nlp
+      - name: Upload Coverage to coveralls.io
+        if: ${{ matrix.python-version == '3.7' }}
+        # only update coverage when running on Python 3.7 (no need to this for all versions)
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        run: coveralls
 
-#  update_coveralls:
-#    name: Update coveralls.io
-#    needs: build  # only update coverage on coveralls.io if all tests pass successfully.
-#    runs_on: ubuntu-latest
+  update_coveralls:
+    name: Update coveralls.io
+    needs: build  # only update coverage on coveralls.io if all tests pass successfully.
+    runs_on: ubuntu-latest
 
 

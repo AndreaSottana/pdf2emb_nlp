@@ -10,4 +10,5 @@ scripts/tmp/
 build/
 dist/
 pdf2emb_nlp.egg-info/
-
+coverage.xml
+.coverage*

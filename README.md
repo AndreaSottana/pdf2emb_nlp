@@ -1,6 +1,7 @@
 [![Build Badge](https://github.com/andreasottana/pdf2emb_nlp/workflows/build/badge.svg)](https://github.com/AndreaSottana/pdf2emb_nlp/actions)
 [![PyPI version](https://img.shields.io/pypi/v/pdf2emb_nlp.svg)](https://pypi.org/project/pdf2emb-nlp/)
 [![Licence](https://img.shields.io/github/license/AndreaSottana/pdf2emb_nlp.svg)](https://github.com/AndreaSottana/pdf2emb_nlp/blob/master/LICENSE)
+[![Coverage Status](https://coveralls.io/repos/github/AndreaSottana/pdf2emb_nlp/badge.svg?branch=master)](https://coveralls.io/github/AndreaSottana/pdf2emb_nlp?branch=master)
 
 NLP tool for scraping text from a corpus of PDF files, embedding the sentences in the text and finding semantically similar sentences to a given search query
 ====================================================================================================================================================================================
