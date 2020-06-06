@@ -1,4 +1,4 @@
-name: ci_master
+name: build
 
 # This workflow is triggered on push or pull request to master branch only.
 # It is also run on schedule once a week, to regularly check that the environment
@@ -41,7 +41,7 @@ jobs:
         env:
           PYTHONHASHSEED: 123  # required for deterministic reproducibility of two Word2Vec tests
         run: |
-          python3 -m pytest
+          python3 -m pytest -v
 
 #  update_coveralls:
 #    name: Update coveralls.io
