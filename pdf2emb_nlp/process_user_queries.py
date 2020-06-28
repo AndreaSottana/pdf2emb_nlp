@@ -154,4 +154,3 @@ def query_embeddings(
         list(trained_df[expected_embeddings_colname]), [user_input_embedding], metric=distance_metric
     )
     return user_input_embedding, trained_df
-
