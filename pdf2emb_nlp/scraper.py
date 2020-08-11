@@ -19,13 +19,16 @@ class DocumentScraper:
         - each column contains the text of a separate pdf file (column name is pdf title without extension), and
         - each row within a column contains the text of one page within that pdf.
     If different pdf files have different number of pages, any empty rows at the bottom of a column are filled with nan.
+    It also offers support for folders stored in the cloud (AWS S3 buckets only).
     """
     def __init__(self, pdf_folder: str, json_filename: Optional[str] = None, from_s3_bucket: bool = False) -> None:
         """
-        :param pdf_folder: path to folder containing pdf files to be scraped
+        :param pdf_folder: path to the folder containing pdf files to be scraped. Can also be an S3 bucket (see below).
         :param json_filename: full path of the json file created by the module json_creator.py. This json file
                contains dictionary of words to replace (e.g. Dr. --> Dr), used for text cleaning. Defaults to None, in
                which case no ad-hoc text cleaning will be performed.
+        :param from_s3_bucket: a boolean specifying whether to scrape the PDFs from a folder located in an AWS S3
+               bucket. If set to True, the path can either start with "s3://" or omit this prefix. Default: False.
         """
         self.pdf_folder = pdf_folder
         self.open_json = self._read_config(json_filename)
