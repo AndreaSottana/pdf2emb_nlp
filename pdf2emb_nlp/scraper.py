@@ -2,6 +2,7 @@ import s3fs
 import slate3k
 import logging
 from tqdm import tqdm
+from boto3 import Session
 import os
 import pandas as pd
 import json
@@ -19,7 +20,7 @@ class DocumentScraper:
         - each row within a column contains the text of one page within that pdf.
     If different pdf files have different number of pages, any empty rows at the bottom of a column are filled with nan.
     """
-    def __init__(self, pdf_folder: str, json_filename: Optional[str] = None) -> None:
+    def __init__(self, pdf_folder: str, json_filename: Optional[str] = None, from_s3_bucket: bool = False) -> None:
         """
         :param pdf_folder: path to folder containing pdf files to be scraped
         :param json_filename: full path of the json file created by the module json_creator.py. This json file
@@ -28,13 +29,17 @@ class DocumentScraper:
         """
         self.pdf_folder = pdf_folder
         self.open_json = self._read_config(json_filename)
-        self.from_s3_bucket = s3fs.S3FileSystem().isdir(pdf_folder) and not os.path.isdir(pdf_folder)
+        self.from_s3_bucket = from_s3_bucket
+
         if self.from_s3_bucket:
+            assert Session().get_credentials() is not None, "You do not have any valid credentials to access AWS S3."
+            assert s3fs.S3FileSystem().isdir(pdf_folder), \
+                f"The directory you specified, {pdf_folder} does not seem to be a valid S3 path you have access to."
             logger.warning("AWS S3 bucket detected: PDFs will be scraped from S3 bucket rather than local storage.")
         if not self.from_s3_bucket and not os.path.isdir(pdf_folder):
             raise FileNotFoundError(
-                f"No such file or directory: {pdf_folder}. We also tried to look for an AWS S3 bucket path but could "
-                f"not find any. Other types of cloud storage are not natively supported by pdf2emb_nlp."
+                f"No such directory: {pdf_folder}. If you intended to read PDFs from an S3 bucket please set "
+                f"from_s3_bucket = True when instantiating DocumentScraper."
             )
 
     @staticmethod
