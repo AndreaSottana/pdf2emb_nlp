@@ -36,7 +36,7 @@ jobs:
           python3 -m pip install --upgrade pip
           python3 -m pip install -r requirements.txt
           python3 -m pip install pytest-cov coveralls
-          python3 -m nltk.downloader punkt stopwords
+          python3 -m nltk.downloader punkt
         # it needs 'punkt' in order to work properly (dataset is not downloaded by default at main nltk installation)
       - name: Run tests with pytest
         env:
